@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redux in vanila Js</title>
+</head>
+<body>
+    <p id="value"></p>
+    <button id="increment">+</button>
+    <button id="decreament">-</button>
+</body>
+<script src="redux.min.js"></script>
+<script>
+    var value = document.getElementById('value')
+    function counter(state, action){
+        if( typeof state === "undefined"){
+            return 0
+        }
+        switch(action.type){
+            case 'INCREMENT': 
+                return state = state + 1
+            case 'DECREMENT': 
+                return state = state - 1
+            default: 
+                return state
+
+        }
+    }
+    var store = Redux.createStore(counter)
+    function render(){
+        value.innerHTML = store.getState().toString()
+    }
+    render()
+    store.subscribe(render)
+    document.getElementById('increment').addEventListener("click", function(e){
+        store.dispatch({
+            type: 'INCREMENT'
+        })
+    })
+    document.getElementById('increment').addEventListener("click", function(e){
+        store.dispatch({
+            type: 'INCREMENT'
+        })
+    })
+</script>
+</html>
